@@ -16,7 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Ecommerce_Store</name>
     <description>Ecommerce Spring boot project for online shopping.</description>
-    <packaging>war</packaging> <!-- Change packaging to war -->
+    <packaging>war</packaging>
     <url/>
     <licenses>
         <license/>
@@ -50,7 +50,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- SQL Server -->
+        <!-- SQL Server JDBC Driver -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>

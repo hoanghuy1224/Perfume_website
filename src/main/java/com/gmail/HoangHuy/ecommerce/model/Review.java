@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Sử dụng IDENTITY thay vì AUTO
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Fill in the input field")
@@ -24,6 +24,6 @@ public class Review {
     @NotBlank(message = "Fill in the input field")
     private String message;
 
-    private LocalDate date; // Hibernate sẽ tự ánh xạ sang kiểu DATE trong SQL Server
+    private LocalDate date;
 }
 

@@ -18,7 +18,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "usr")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,7 +27,7 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Sử dụng IDENTITY thay vì AUTO
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Username cannot be empty")
@@ -59,7 +59,6 @@ public class User implements UserDetails {
     )
     private List<Perfume> perfumeList;
 
-    // Kiểm tra quyền Admin
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }

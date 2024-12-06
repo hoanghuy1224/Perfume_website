@@ -19,8 +19,8 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private  UserDetailsService userDetailsService;
 
     @Value("${jwt.header}")
     private String authorizationHeader;
@@ -31,10 +31,10 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 
-    @Autowired
-    public JwtProvider(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+//    @Autowired
+//    public JwtProvider(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 
     @PostConstruct
     protected void init() {

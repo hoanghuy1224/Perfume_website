@@ -16,17 +16,16 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends GenericFilterBean {
-
-    private final JwtProvider jwtProvider;
-
     @Autowired
-    public JwtFilter(JwtProvider jwtProvider) {
-        this.jwtProvider = jwtProvider;
-    }
+    private  JwtProvider jwtProvider;
+
+//    @Autowired
+//    public JwtFilter(JwtProvider jwtProvider) {
+//        this.jwtProvider = jwtProvider;
+//    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        // Chuyển ServletRequest thành HttpServletRequest
         String token = jwtProvider.resolveToken((HttpServletRequest) servletRequest);
 
         try {

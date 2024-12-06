@@ -24,34 +24,35 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@Service("userDetailsServiceImpl")
+@Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    private final UserRepository userRepository;
-
-    private final MailSender mailSender;
-
-    private final PasswordEncoder passwordEncoder;
-
-    private final PerfumeRepository perfumeRepository;
-
-    private final ReviewRepository reviewRepository;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  MailSender mailSender;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
+    @Autowired
+    private  PerfumeRepository perfumeRepository;
+    @Autowired
+    private  ReviewRepository reviewRepository;
 
     @Value("${hostname}")
     private String hostname;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository,
-                           MailSender mailSender,
-                           PasswordEncoder passwordEncoder,
-                           PerfumeRepository perfumeRepository,
-                           ReviewRepository reviewRepository) {
-        this.userRepository = userRepository;
-        this.mailSender = mailSender;
-        this.passwordEncoder = passwordEncoder;
-        this.perfumeRepository = perfumeRepository;
-        this.reviewRepository = reviewRepository;
-    }
+//    @Autowired
+//    public UserServiceImpl(UserRepository userRepository,
+//                           MailSender mailSender,
+//                           PasswordEncoder passwordEncoder,
+//                           PerfumeRepository perfumeRepository,
+//                           ReviewRepository reviewRepository) {
+//        this.userRepository = userRepository;
+//        this.mailSender = mailSender;
+//        this.passwordEncoder = passwordEncoder;
+//        this.perfumeRepository = perfumeRepository;
+//        this.reviewRepository = reviewRepository;
+//    }
 
     @Override
     public User getOne(Long id) {

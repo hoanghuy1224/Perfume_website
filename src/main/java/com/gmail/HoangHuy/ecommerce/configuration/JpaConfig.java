@@ -17,11 +17,10 @@ import javax.sql.DataSource;
 public class JpaConfig {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder, DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.gmail.HoangHuy.ecommerce.model")
+                .packages("com.gmail.HoangHuy.ecommerce.model") // Đảm bảo package chứa các entity
                 .persistenceUnit("ecommercePU")
                 .build();
     }
@@ -31,4 +30,5 @@ public class JpaConfig {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }
+
 
