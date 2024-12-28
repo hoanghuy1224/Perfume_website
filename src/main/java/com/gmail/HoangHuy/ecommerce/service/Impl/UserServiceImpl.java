@@ -41,19 +41,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Value("${hostname}")
     private String hostname;
 
-//    @Autowired
-//    public UserServiceImpl(UserRepository userRepository,
-//                           MailSender mailSender,
-//                           PasswordEncoder passwordEncoder,
-//                           PerfumeRepository perfumeRepository,
-//                           ReviewRepository reviewRepository) {
-//        this.userRepository = userRepository;
-//        this.mailSender = mailSender;
-//        this.passwordEncoder = passwordEncoder;
-//        this.perfumeRepository = perfumeRepository;
-//        this.reviewRepository = reviewRepository;
-//    }
-
     @Override
     public User getOne(Long id) {
         return userRepository.getOne(id);

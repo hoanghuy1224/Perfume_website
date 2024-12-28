@@ -16,12 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration   {
 
     private final JwtConfigurer jwtConfigurer;
 
-    @Autowired
     public WebSecurityConfiguration(JwtConfigurer jwtConfigurer) {
         this.jwtConfigurer = jwtConfigurer;
     }
@@ -54,7 +53,6 @@ public class WebSecurityConfiguration   {
                         .requestMatchers("/api/v1/rest/login").permitAll()  // Đường dẫn login không yêu cầu xác thực
                         .anyRequest().authenticated()  // Các yêu cầu khác đều yêu cầu xác thực
                 );
-        // Áp dụng JwtConfigurer
         jwtConfigurer.configure(http);
         return http.build();
     }
@@ -63,7 +61,7 @@ public class WebSecurityConfiguration   {
     public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder);  // Đảm bảo sử dụng PasswordEncoder
+                .passwordEncoder(passwordEncoder);
         return authenticationManagerBuilder.build();
     }
 

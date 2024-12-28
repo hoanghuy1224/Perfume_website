@@ -1,11 +1,9 @@
 package com.gmail.HoangHuy.ecommerce.security;
-
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,8 +17,9 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-    @Autowired
-    private  UserDetailsService userDetailsService;
+
+
+    private final UserDetailsService userDetailsService;
 
     @Value("${jwt.header}")
     private String authorizationHeader;
@@ -31,6 +30,9 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 
+    public JwtProvider(@Lazy UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 //    @Autowired
 //    public JwtProvider(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
 //        this.userDetailsService = userDetailsService;
@@ -38,9 +40,10 @@ public class JwtProvider {
 
     @PostConstruct
     protected void init() {
-        // Mã hóa secretKey bằng Base64
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        System.out.println("Encoded secretKey: " + secretKey);
     }
+
 
     public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);

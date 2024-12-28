@@ -25,5 +25,9 @@ public class Review {
     private String message;
 
     private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "perfume_id", nullable = false)
+    private Perfume perfume;
 }
 

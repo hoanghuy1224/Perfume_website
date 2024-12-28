@@ -1,5 +1,4 @@
 package com.gmail.HoangHuy.ecommerce.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
