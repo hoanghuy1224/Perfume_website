@@ -16,63 +16,62 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id", "perfumer", "perfumeTitle", "perfumeGender", "price"})
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Perfume {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Perfume title is required")
-    @Size(max = 255, message = "Title must be less than 255 characters")
+    @NotBlank(message = "Tên nước hoa là bắt buộc")
+    @Size(max = 255, message = "Tên nước hoa phải ít hơn 255 ký tự")
     private String perfumeTitle;
 
-    @NotBlank(message = "Perfumer name is required")
-    @Size(max = 255, message = "Perfumer name must be less than 255 characters")
+    @NotBlank(message = "Tên nhà sản xuất là bắt buộc")
+    @Size(max = 255, message = "Tên nhà sản xuất phải ít hơn 255 ký tự")
     private String perfumer;
 
-    @NotNull(message = "Year is required")
-    @Min(value = 1900, message = "Year must be a valid year")
-    @Max(value = 2100, message = "Year must be a valid year")
+    @NotNull(message = "Năm sản xuất là bắt buộc")
+    @Min(value = 1900, message = "Năm sản xuất phải hợp lệ")
+    @Max(value = 2100, message = "Năm sản xuất phải hợp lệ")
     private Integer year;
 
-    @NotBlank(message = "Country name is required")
-    @Size(max = 255, message = "Country name must be less than 255 characters")
+    @NotBlank(message = "Tên quốc gia là bắt buộc")
+    @Size(max = 255, message = "Tên quốc gia phải ít hơn 255 ký tự")
     private String country;
 
-    @NotBlank(message = "Perfume gender is required")
-    @Size(max = 255, message = "Gender must be less than 255 characters")
+    @NotBlank(message = "Giới tính nước hoa là bắt buộc")
+    @Size(max = 255, message = "Giới tính nước hoa phải ít hơn 255 ký tự")
     private String perfumeGender;
 
-    @NotBlank(message = "Fragrance top notes are required")
-    @Size(max = 255, message = "Fragrance top notes must be less than 255 characters")
+    @NotBlank(message = "Hương đầu là bắt buộc")
+    @Size(max = 255, message = "Hương đầu phải ít hơn 255 ký tự")
     private String fragranceTopNotes;
 
-    @NotBlank(message = "Fragrance middle notes are required")
-    @Size(max = 255, message = "Fragrance middle notes must be less than 255 characters")
+    @NotBlank(message = "Hương giữa là bắt buộc")
+    @Size(max = 255, message = "Hương giữa phải ít hơn 255 ký tự")
     private String fragranceMiddleNotes;
 
-    @NotBlank(message = "Fragrance base notes are required")
-    @Size(max = 255, message = "Fragrance base notes must be less than 255 characters")
+    @NotBlank(message = "Hương cuối là bắt buộc")
+    @Size(max = 255, message = "Hương cuối phải ít hơn 255 ký tự")
     private String fragranceBaseNotes;
 
     private String description;
 
     private String filename;
 
-    @NotNull(message = "Price is required")
-    @Min(value = 0, message = "Price must be greater than or equal to 0")
+    @NotNull(message = "Giá bán là bắt buộc")
+    @Min(value = 0, message = "Giá bán phải lớn hơn hoặc bằng 0")
     private Integer price;
 
-    @NotBlank(message = "Volume is required")
-    @Size(max = 255, message = "Volume must be less than 255 characters")
+    @NotBlank(message = "Dung tích là bắt buộc")
+    @Size(max = 255, message = "Dung tích phải ít hơn 255 ký tự")
     private String volume;
 
-    @NotBlank(message = "Type is required")
-    @Size(max = 255, message = "Type must be less than 255 characters")
+    @NotBlank(message = "Loại nước hoa là bắt buộc")
+    @Size(max = 255, message = "Loại nước hoa phải ít hơn 255 ký tự")
     private String type;
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 }
+

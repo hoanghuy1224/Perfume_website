@@ -44,11 +44,7 @@ public class AdminRestController {
     }
 
     @PostMapping("/admin/add")
-    public ResponseEntity<?> addPerfume(
-            @Valid Perfume perfume,
-            BindingResult bindingResult,
-            @RequestPart(name = "file", required = false) MultipartFile file
-    ) throws IOException {
+    public ResponseEntity<?> addPerfume(@Valid Perfume perfume, BindingResult bindingResult, @RequestPart(name = "file", required = false) MultipartFile file) throws IOException {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
@@ -63,11 +59,7 @@ public class AdminRestController {
     }
 
     @PutMapping("/admin/edit")
-    public ResponseEntity<?> updatePerfume(
-            @Valid Perfume perfume,
-            BindingResult bindingResult,
-            @RequestPart(name = "file", required = false) MultipartFile file
-    ) throws IOException {
+    public ResponseEntity<?> updatePerfume(@Valid Perfume perfume, BindingResult bindingResult, @RequestPart(name = "file", required = false) MultipartFile file) throws IOException {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
@@ -75,10 +67,7 @@ public class AdminRestController {
         } else {
             saveFile(perfume, file);
 
-            perfumeService.saveProductInfoById(perfume.getPerfumeTitle(), perfume.getPerfumer(), perfume.getYear(),
-                    perfume.getCountry(), perfume.getPerfumeGender(), perfume.getFragranceTopNotes(),
-                    perfume.getFragranceMiddleNotes(), perfume.getFragranceBaseNotes(), perfume.getDescription(),
-                    perfume.getFilename(), perfume.getPrice(), perfume.getVolume(), perfume.getType(), perfume.getId());
+            perfumeService.saveProductInfoById(perfume.getPerfumeTitle(), perfume.getPerfumer(), perfume.getYear(), perfume.getCountry(), perfume.getPerfumeGender(), perfume.getFragranceTopNotes(), perfume.getFragranceMiddleNotes(), perfume.getFragranceBaseNotes(), perfume.getDescription(), perfume.getFilename(), perfume.getPrice(), perfume.getVolume(), perfume.getType(), perfume.getId());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -106,11 +95,7 @@ public class AdminRestController {
     }
 
     @PutMapping("/admin/user/edit")
-    public ResponseEntity<?> updateUser(
-            @RequestParam String username,
-            @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
-    ) {
+    public ResponseEntity<?> updateUser(@RequestParam String username, @RequestParam Map<String, String> form, @RequestParam("userId") User user) {
         userService.userSave(username, form, user);
 
         return new ResponseEntity<>(HttpStatus.OK);

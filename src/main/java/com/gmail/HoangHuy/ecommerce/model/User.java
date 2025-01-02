@@ -1,10 +1,8 @@
 package com.gmail.HoangHuy.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,22 +20,20 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id", "username", "activationCode"})
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Username cannot be empty")
+    @NotBlank(message = "Tên người dùng không được để trống")
     private String username;
 
-    @NotBlank(message = "Password cannot be empty")
+    @NotBlank(message = "Mật khẩu không được để trống")
     private String password;
 
-    @Email(message = "Incorrect email")
-    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email không hợp lệ")
+    @NotBlank(message = "Email không được để trống")
     private String email;
 
     private boolean active;

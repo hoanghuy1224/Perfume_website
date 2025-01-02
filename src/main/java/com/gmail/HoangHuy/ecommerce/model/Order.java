@@ -28,37 +28,37 @@ public class Order {
 
     private Double totalPrice;
 
-    private LocalDate date; // Hibernate tự ánh xạ sang kiểu DATE trong SQL Server
+    private LocalDate date;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Vui lòng điền vào trường này")
     private String firstName;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Vui lòng điền vào trường này")
     private String lastName;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Vui lòng điền vào trường này")
     private String city;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Vui lòng điền vào trường này")
     private String address;
 
-    @Email(message = "Incorrect email")
-    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email không hợp lệ")
+    @NotBlank(message = "Email không được để trống")
     private String email;
 
-    @NotBlank(message = "Phone number cannot be empty")
+    @NotBlank(message = "Số điện thoại không được để trống")
     private String phoneNumber;
 
-    @NotNull(message = "Post index cannot be empty")
-    @Min(value = 10000, message = "Post index must contain 5 digits")
+    @NotNull(message = "Mã bưu điện không được để trống")
+    @Min(value = 10000, message = "Mã bưu điện phải có ít nhất 5 chữ số")
     private Integer postIndex;
 
-    // Cấu hình bảng liên kết giữa Order và Perfume
+    // liên kết giữa Order và Perfume
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_perfume",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "perfume_id"))
-    @OrderColumn(name = "list_order") // Thêm cột lưu thứ tự
+    @OrderColumn(name = "list_order")
     private List<Perfume> perfumeList;
 
     @ManyToOne
@@ -70,3 +70,4 @@ public class Order {
         this.perfumeList = new ArrayList<>();
     }
 }
+

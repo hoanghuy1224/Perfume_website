@@ -22,22 +22,17 @@ public class JwtProvider {
     private final UserDetailsService userDetailsService;
 
     @Value("${jwt.header}")
-    private String authorizationHeader;
+    private String Header;
 
     @Value("${jwt.secret}")
     private String secretKey;
 
     @Value("${jwt.expiration}")
-    private long validityInMilliseconds;
+    private long expiration;
 
     public JwtProvider(@Lazy UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-//    @Autowired
-//    public JwtProvider(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
-
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
@@ -50,7 +45,7 @@ public class JwtProvider {
         claims.put("role", role);
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds * 1000);
+        Date validity = new Date(now.getTime() + expiration * 1000);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -87,7 +82,7 @@ public class JwtProvider {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(authorizationHeader);
+        String bearerToken = request.getHeader(Header);
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }

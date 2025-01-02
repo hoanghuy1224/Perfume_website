@@ -18,10 +18,10 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Tên tác giả không được để trống")
     private String author;
 
-    @NotBlank(message = "Fill in the input field")
+    @NotBlank(message = "Nội dung không được để trống")
     private String message;
 
     private LocalDate date;

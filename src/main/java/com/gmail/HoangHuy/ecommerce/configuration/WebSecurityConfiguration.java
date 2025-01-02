@@ -1,13 +1,10 @@
 package com.gmail.HoangHuy.ecommerce.configuration;
 
 import com.gmail.HoangHuy.ecommerce.security.JwtConfigurer;
-import org.hibernate.internal.build.AllowNonPortable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +26,7 @@ public class WebSecurityConfiguration   {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Áp dụng cấu hình bảo mật với các đường dẫn và quyền truy cập
         http
-                .csrf(csrf -> csrf.disable())  // Vô hiệu hóa CSRF cho API RESTful
+                .csrf(csrf -> csrf.disable())  // Vô hiệu hóa CSRF API RESTful
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/v1/rest",
                                 "/api/v1/rest/product/*",
