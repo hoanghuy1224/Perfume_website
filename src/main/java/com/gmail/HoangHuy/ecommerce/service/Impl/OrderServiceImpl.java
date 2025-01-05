@@ -71,17 +71,17 @@ public class OrderServiceImpl implements OrderService {
             perfumes.append("\n");
         });
 
-        String subject = "Order #" + order.getId();
-        String message = "Hello " + order.getFirstName() + "!\n" +
-                "Thank you for your order in Perfume online store.\n" +
-                "Your order number is " + order.getId() + "\n" +
-                "Date: " + order.getDate() + "\n" +
-                "Name: " + order.getFirstName() + " " + order.getLastName() + "\n" +
-                "Address: " + order.getCity() + ", " + order.getAddress() + "\n" +
-                "Post index: " + order.getPostIndex() + "\n" +
-                "Phone: " + order.getPhoneNumber() + "\n" +
-                "Perfumes: " + "\n" + perfumes + "\n" +
-                "Total price: $" + order.getTotalPrice();
+        String subject = "Đơn hàng #" + order.getId();
+        String message = "Chào " + order.getFirstName() + "!\n" +
+                "Cảm ơn bạn đã đặt hàng tại cửa hàng nước hoa online.\n" +
+                "Số đơn hàng của bạn là " + order.getId() + "\n" +
+                "Ngày: " + order.getDate() + "\n" +
+                "Tên: " + order.getFirstName() + " " + order.getLastName() + "\n" +
+                "Địa chỉ: " + order.getCity() + ", " + order.getAddress() + "\n" +
+                "Mã bưu điện: " + order.getPostIndex() + "\n" +
+                "Số điện thoại: " + order.getPhoneNumber() + "\n" +
+                "Sản phẩm nước hoa: " + "\n" + perfumes + "\n" +
+                "Tổng giá trị: $" + order.getTotalPrice();
 
         mailSender.send(order.getEmail(), subject, message);
 

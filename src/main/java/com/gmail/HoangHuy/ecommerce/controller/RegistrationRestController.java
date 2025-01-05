@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,18 +18,15 @@ import java.util.Map;
 public class RegistrationRestController {
 
     private final UserService userService;
-    private final RestTemplate restTemplate;
 
     @Autowired
     public RegistrationRestController(UserService userService, RestTemplate restTemplate) {
         this.userService = userService;
-        this.restTemplate = restTemplate;
     }
 
     @PostMapping("/registration")
     public ResponseEntity<?> registration(
             @RequestParam("password2") String passwordConfirm,
-            @RequestParam("g-recaptcha-response")
             @Valid User user
 
     ) {
@@ -39,19 +35,19 @@ public class RegistrationRestController {
         Map<String, String> errors = new HashMap<>();
 
         if (isConfirmEmpty) {
-            errors.put("password2Error", "Password confirmation cannot be empty");
+            errors.put("password2Error", "Xác nhận mật khẩu không được để trống");
 
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
         if (isPasswordDifferent) {
-            errors.put("passwordError", "Passwords do not match");
+            errors.put("passwordError", "Mật khẩu không khớp");
 
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
         if (!userService.addUser(user)) {
-            errors.put("emailError", "Email is already used");
+            errors.put("emailError", "Email đã được sử dụng");
 
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
@@ -64,9 +60,9 @@ public class RegistrationRestController {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            return new ResponseEntity<>("User successfully activated", HttpStatus.OK);
+            return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Activation code not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Không tìm thấy mã kích hoạt", HttpStatus.NOT_FOUND);
         }
     }
 }

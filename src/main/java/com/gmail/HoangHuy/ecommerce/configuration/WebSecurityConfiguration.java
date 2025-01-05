@@ -45,7 +45,8 @@ public class WebSecurityConfiguration   {
                                 "/img/**",
                                 "/static/**",
                                 "/activate/*",
-                                "/menu/**")
+                                "/menu/**",
+                                "/error")
                         .permitAll()  // Các đường dẫn này được phép truy cập không cần xác thực
                         .requestMatchers("/api/v1/rest/login").permitAll()  // Đường dẫn login không yêu cầu xác thực
                         .anyRequest().authenticated()  // Các yêu cầu khác đều yêu cầu xác thực

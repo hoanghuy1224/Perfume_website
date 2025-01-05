@@ -60,7 +60,7 @@ public class AuthenticationRestController {
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (AuthenticationException e) {
-            return new ResponseEntity<>("Incorrect password or email", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Mật khẩu hoặc email không đúng", HttpStatus.FORBIDDEN);
         }
     }
 
@@ -70,10 +70,10 @@ public class AuthenticationRestController {
         boolean forgotPassword = userService.sendPasswordResetCode(passwordReset.getEmail());
 
         if (!forgotPassword) {
-            return new ResponseEntity<>("Email not found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Không tìm thấy email", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("Reset password code is send to your E-mail", HttpStatus.OK);
+        return new ResponseEntity<>("Mã đặt lại mật khẩu được gửi đến E-mail của bạn", HttpStatus.OK);
     }
 
     @GetMapping("/reset/{code}")
@@ -81,7 +81,7 @@ public class AuthenticationRestController {
         User user = userService.findByPasswordResetCode(code);
 
         if (user == null) {
-            return new ResponseEntity<>("Password reset code is invalid!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Mã đặt lại mật khẩu không hợp lệ!", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -95,20 +95,20 @@ public class AuthenticationRestController {
                 !passwordReset.getPassword().equals(passwordReset.getPassword2());
 
         if (isConfirmEmpty) {
-            errors.put("password2Error", "Password confirmation cannot be empty");
+            errors.put("password2Error", "Xác nhận mật khẩu không được để trống");
 
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
         if (isPasswordDifferent) {
-            errors.put("passwordError", "Passwords do not match");
+            errors.put("passwordError", "Mật khẩu không khớp");
 
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
         userService.passwordReset(passwordReset);
 
-        return new ResponseEntity<>("Password successfully changed!", HttpStatus.OK);
+        return new ResponseEntity<>("Đã thay đổi mật khẩu thành công!", HttpStatus.OK);
     }
 
     @PostMapping("/logout")

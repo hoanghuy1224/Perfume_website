@@ -18,7 +18,6 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-
     private final UserDetailsService userDetailsService;
 
     @Value("${jwt.header}")
@@ -36,7 +35,7 @@ public class JwtProvider {
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-        System.out.println("Encoded secretKey: " + secretKey);
+        System.out.println(" secretKey: " + secretKey);
     }
 
 
@@ -60,11 +59,11 @@ public class JwtProvider {
             Jws<Claims> claimsJws = Jwts.parser()
                     .setSigningKey(secretKey)
                     .parseClaimsJws(token);
-
+    
             // Kiểm tra token có hết hạn không
             return !claimsJws.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException exception) {
-            throw new JwtAuthenticationException("JWT token is expired or invalid", HttpStatus.UNAUTHORIZED);
+            throw new JwtAuthenticationException("Mã thông báo JWT đã hết hạn hoặc không hợp lệ", HttpStatus.UNAUTHORIZED);
         }
     }
 

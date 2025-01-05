@@ -33,7 +33,7 @@ public class JwtFilter extends GenericFilterBean {
             SecurityContextHolder.clearContext();
             // Gửi lỗi HTTP nếu token không hợp lệ
             ((HttpServletResponse) servletResponse).sendError(e.getHttpStatus().value());
-            throw new JwtAuthenticationException("JWT token is expired or invalid");
+            throw new JwtAuthenticationException("Mã thông báo JWT đã hết hạn hoặc không hợp lệ");
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

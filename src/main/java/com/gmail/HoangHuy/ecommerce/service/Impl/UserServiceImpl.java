@@ -82,11 +82,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User user = userRepository.findByEmail(email);
 
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Không tìm thấy người dùng");
         }
 
         if (user.getActivationCode() != null) {
-            throw new LockedException("email not activated");
+            throw new LockedException("email chưa được kích hoạt");
         }
 
         return user;
@@ -107,10 +107,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         userRepository.save(user);
 
-        String subject = "Activation code";
+        String subject = "Perfume Store";
         List<String> emailMessages = new ArrayList<>();
-        emailMessages.add("Welcome to Perfume online store.");
-        emailMessages.add("Please follow the link ");
+        emailMessages.add("Đăng kí tài khoản thành công");
+        emailMessages.add("Chào mừng đến với cửa hàng trực tuyến Perfume.");
 
         sendMessage(user, emailMessages, subject, user.getActivationCode(), "activate");
 
@@ -128,10 +128,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user.setPasswordResetCode(UUID.randomUUID().toString());
         userRepository.save(user);
 
-        String subject = "Password reset";
+        String subject = "Khôi phục mật khẩu";
         List<String> emailMessages = new ArrayList<>();
-        emailMessages.add("We have received a request to reset the password for your account.");
-        emailMessages.add("To reset your password, follow this link ");
+        emailMessages.add("Chúng tôi đã nhận được yêu cầu khôi phục mật khẩu cho tài khoản của bạn.");
+        emailMessages.add("Để khôi phục mật khẩu, vui lòng làm theo liên kết này ");
 
         sendMessage(user, emailMessages, subject, user.getPasswordResetCode(), "reset");
 
